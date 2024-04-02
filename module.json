@@ -1,0 +1,19 @@
+{
+    "id": "foundry-utils",
+    "title": "Foundry Utils",
+    "description": "A simple module with utils for Foundry VTT",
+    "authors": [
+      {
+        "name": "Marcus Moyses"
+      }
+    ],
+    "version": "0.0.1",
+    "compatibility": {
+      "minimum": "11",
+      "verified": "11"
+    },
+    "system": ["dnd5e"],
+    "esmodules": [
+      "scripts/module.js"
+    ]
+  }
