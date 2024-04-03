@@ -7,7 +7,14 @@
         "name": "Marcus Moyses"
       }
     ],
-    "version": "0.0.1",
+    "library": "false",
+    "manifestPlusVersion": "1.2.0",
+    "license": "LICENSE",
+    "readme": "README.md",
+    "version": "#{VERSION}#",
+    "url": "#{URL}#",
+    "manifest": "#{MANIFEST}#",
+    "download": "#{DOWNLOAD}#",
     "compatibility": {
       "minimum": "11",
       "verified": "11"
