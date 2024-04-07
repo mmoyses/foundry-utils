@@ -1,7 +1,38 @@
+const distanceFunctions = {
+    '555': distance555,
+    '5105': distance5105,
+    'EUCL': distanceEuclidean
+}
+
 function distance(token1, token2) {
     const {x: x1, y: y1} = token1.center
+    const z1 = token1.document?.elevation * canvas.dimensions.distancePixels
     const {x: x2, y: y2} = token2.center
-    return roundToNearestMultipleOfFive(Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) / canvas.dimensions.distancePixels)
+    const z2 = token2.document?.elevation * canvas.dimensions.distancePixels
+    const func = getDistanceFunction()
+    return func(x1, y1, z1, x2, y2, z2)
+}
+
+function getDistanceFunction() {
+    const config = game.settings.get('dnd5e', 'diagonalMovement')
+    return distanceFunctions[config]
+}
+
+function euclidean(x1, y1, z1, x2, y2, z2) {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2) + Math.pow(z1 - z2, 2)) / canvas.dimensions.distancePixels
+}
+
+function distanceEuclidean(x1, y1, z1, x2, y2, z2) {
+    return Math.round(euclidean(x1, y1, z1, x2, y2, z2))
+}
+
+function distance5105(x1, y1, z1, x2, y2, z2) {
+    return roundToNearestMultipleOfFive(euclidean(x1, y1, z1, x2, y2, z2))
+}
+
+function distance555(x1, y1, z1, x2, y2, z2) {
+    const distPixels = canvas.dimensions.distancePixels
+    return Math.max(Math.abs(x1 - x2) / distPixels, Math.abs(y1 - y2) / distPixels, Math.abs(z1 - z2) / distPixels);
 }
 
 function roundToNearestMultipleOfFive(num) {
