@@ -76,7 +76,7 @@ function createText(controlled, token) {
 export class Distance {
 
     static onHoverToken(token, hovered) {
-        if (canvas.tokens?.controlled.length === 1 && token.isVisible && token.document.actorLink) {
+        if (canvas.tokens?.controlled.length === 1 && token.isVisible && token.actor?.prototypeToken?.name !== 'Item Pile') {
             if (hovered) {
                 // display distance only if there is one controlled token and hovering over actor token
                 createText(canvas.tokens.controlled[0], token)
@@ -96,7 +96,7 @@ export class Distance {
             ],
             onDown: () => {
                 canvas.tokens?.objects.children.forEach(token => {
-                    if (!canvas.tokens?.controlled.length == 1 || !token.isVisible || !token.document.actorLink) return
+                    if (!canvas.tokens?.controlled.length == 1 || !token.isVisible || token.actor?.prototypeToken?.name === 'Item Pile') return
                     createText(canvas.tokens.controlled[0], token)
                 })
             },
