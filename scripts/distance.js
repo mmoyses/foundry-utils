@@ -1,7 +1,7 @@
 const distanceFunctions = {
-    '555': distance555,
-    '5105': distance5105,
-    'EUCL': distanceEuclidean
+    0: distance555,
+    1: distanceEuclidean,
+    3: distance5105
 }
 
 function distance(token1, token2) {
@@ -14,7 +14,7 @@ function distance(token1, token2) {
 }
 
 function getDistanceFunction() {
-    const config = game.settings.get('dnd5e', 'diagonalMovement')
+    const config = game.settings.get('core', 'gridDiagonals')
     return distanceFunctions[config]
 }
 
